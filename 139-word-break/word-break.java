@@ -1,5 +1,5 @@
 class Solution {
-    public Boolean rec(String s,List<String> wordDict,int idx,Boolean[] memo)
+    public Boolean rec(String s,Set<String> wordDict,int idx,Boolean[] memo)
     {
         if(idx==s.length())
         {
@@ -33,7 +33,14 @@ class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
                 Boolean[] memo = new Boolean[s.length()];
 
-        return rec(s,wordDict,0,memo);
+                Set<String> set=new HashSet<>(); // for finding the element in it in 0(1)
+
+                for(int i=0;i<wordDict.size();i++)
+                {
+                    set.add(wordDict.get(i));
+                }
+
+        return rec(s,set,0,memo);
     }
 }
 
