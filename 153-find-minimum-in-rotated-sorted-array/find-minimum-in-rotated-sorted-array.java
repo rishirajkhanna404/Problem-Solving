@@ -1,42 +1,24 @@
 class Solution {
     public int findMin(int[] nums) {
-
-        if(nums.length==1)
-        {
-            return nums[0];
-        }
         int s=0;
         int e=nums.length-1;
+        int minElementInSortedPart=Integer.MAX_VALUE;
         int mid=0;
-        int n=nums.length;
 
         while(s<=e)
         {
             mid=s+(e-s)/2;
-
-            if(nums[mid]<nums[(mid-1+n)%n] && nums[mid]<nums[(mid+1)%n])
+            if(nums[s]<=nums[mid])
             {
-                return nums[mid];
+                minElementInSortedPart=Math.min(minElementInSortedPart,nums[s]);
+                s=mid+1;
             }
-            else if(nums[s]<=nums[mid] && nums[mid]>nums[(mid+1)%n])
-            {
-                return nums[(mid+1)%n];
-            }
-            else if(nums[mid]>nums[(mid-1+n)%n] && nums[mid]<nums[(mid+1)%n])
-            {
-                if(nums[s]<=nums[mid])
-                {
-                    s=mid+1;
-                }
-                else 
-                {
-                    e=mid-1;
-                }
+            else{
+                minElementInSortedPart=Math.min(minElementInSortedPart,nums[mid]);
+                e=mid-1;
             }
         }
-        return nums[s];
+
+        return minElementInSortedPart;
     }
 }
-
-
-
