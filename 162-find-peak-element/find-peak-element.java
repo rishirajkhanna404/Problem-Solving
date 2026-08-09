@@ -28,13 +28,13 @@ class Solution {
             {
                 return mid;
             }
-            else if(nums[mid+1]>nums[mid])
+            else if(nums[mid+1]<nums[mid])
             {
-                s=mid+1;
+                e=mid-1;
             }
             else
             {
-                e=mid;
+                s=mid+1;
             }
         }
 
