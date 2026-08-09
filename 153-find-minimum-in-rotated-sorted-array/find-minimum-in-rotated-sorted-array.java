@@ -8,6 +8,12 @@ class Solution {
         while(s<=e)
         {
             mid=s+(e-s)/2;
+
+            if(nums[s]<=nums[e])
+            {
+                minElementInSortedPart=Math.min(minElementInSortedPart,nums[s]);
+               break;
+            }
             if(nums[s]<=nums[mid])
             {
                 minElementInSortedPart=Math.min(minElementInSortedPart,nums[s]);
