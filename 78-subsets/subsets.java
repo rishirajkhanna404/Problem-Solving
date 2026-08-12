@@ -1,25 +1,25 @@
 class Solution {
+    public void rec(int[] nums,List<List<Integer>> ans,List<Integer> list,int idx)
+    {
+        if(idx==nums.length)
+        {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        list.add(nums[idx]);
+        rec(nums,ans,list,idx+1);
+        list.remove(list.size()-1);
+        
+        rec(nums,ans,list,idx+1);
+
+    }
     public List<List<Integer>> subsets(int[] nums) {
-         // 000 , 001 , ....
-         
-         List<List<Integer>> ans=new ArrayList<>();
+        List<List<Integer>> ans=new ArrayList<>();
+        List<Integer> list=new ArrayList<>();
 
-         for(int i=0;i<(1<<nums.length);i++)
-         {
-            int x=i;
-         List<Integer> list=new ArrayList<>();
+        rec(nums,ans,list,0);
 
-         for(int j=0;j<nums.length;j++)
-         {
-            if((x & 1)==1)
-            {
-                list.add(nums[j]);
-            }
-            x=x>>1;
-         }
-            ans.add(list);
-         } 
-
-         return ans;
+        return ans;
     }
 }
