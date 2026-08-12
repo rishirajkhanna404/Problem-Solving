@@ -1,31 +1,29 @@
 class Solution {
-    public void rec(List<List<Integer>> ans,List<Integer> list,int[] arr,int i)
-    {
-       if(i>=arr.length)
-       {
-         ans.add(new ArrayList<>(list));
-         return;
-       }
-
-
-         list.add(arr[i]);
-         rec(ans,list,arr,i+1);
-         list.remove(list.size()-1);
-
-        int idx=i+1;
-        while(idx<arr.length && arr[idx]==arr[idx-1])
-        {
-            idx++;
-        }
-        rec(ans,list,arr,idx);
-    }
-
     public List<List<Integer>> subsetsWithDup(int[] nums) {
-        List<List<Integer>> ans=new ArrayList<>();
-        List<Integer> list=new ArrayList<>();
         Arrays.sort(nums);
-        rec(ans,list,nums,0);
+        List<List<Integer>> ans=new ArrayList<>();
+        Set<List<Integer>> subAns=new HashSet<>();
+        int n=nums.length;
 
+        for(int i=0;i<Math.pow(2,n);i++)
+        {
+            List<Integer> list=new ArrayList<>();
+            
+            for(int j=0;j<n;j++)
+            {
+                int x=1<<(n-1-j);
+                if((i&x)!=0)
+                {
+                    list.add(nums[j]);
+                }
+            }
+          subAns.add(list);
+        }
+
+        for(List<Integer> y:subAns)
+        {
+            ans.add(y);
+        }
         return ans;
     }
 }
