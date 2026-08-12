@@ -1,38 +1,31 @@
 class Solution {
-    
-    public void rec(int[] arr,List<List<Integer>> ans,List<Integer> list,int k,int target,int idx){
-
-         if(list.size()==k)
+    public void rec(int k,int n,int idx,List<List<Integer>> ans,List<Integer> list)
+    {
+        if(k==0)
         {
-            if(target==0)
+            if(n==0)
             {
-                ans.add(new ArrayList<>(list));
+               ans.add(new ArrayList<>(list));
             }
             return;
         }
-
-        if(idx==arr.length)
+        if(idx==9)
         {
-            return;
+          return;   
         }
 
-       
+        list.add(idx+1);
+        rec(k-1,n-idx-1,idx+1,ans,list);
+        list.remove(list.size()-1);
 
-        if(arr[idx]<=target)
-        {
-            list.add(arr[idx]);
-             rec(arr,ans,list,k,target-arr[idx],idx+1);
-             list.remove(list.size()-1);
-        }
-        rec(arr,ans,list,k,target,idx+1);
+        rec(k,n,idx+1,ans,list);
     }
 
     public List<List<Integer>> combinationSum3(int k, int n) {
         List<List<Integer>> ans=new ArrayList<>();
         List<Integer> list=new ArrayList<>();
-        int[] arr={1,2,3,4,5,6,7,8,9};
 
-        rec(arr,ans,list,k,n,0);
-return ans;
+        rec(k,n,0,ans,list);
+        return ans;
     }
 }
